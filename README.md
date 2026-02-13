@@ -287,9 +287,30 @@ INSERT INTO ApiKeys (api_key) VALUES
    - ارسال پیام ✅
    - ارسال عکس ✅
    - ارسال لینک ✅
-
 ---
-
+### مرحله ۸: تنظیم وب‌هوک (Webhook)
+برای دریافت دستورات ادمین در ربات، باید وب‌هوک تنظیم کنید:
+**۱. دریافت آدرس Worker:**
+1. در داشبورد Cloudflare، Worker `devbot` را باز کنید
+2. آدرس Worker را کپی کنید (مثلاً: `https://devbot.your-subdomain.workers.dev`)
+**۲. تنظیم وب‌هوک با تلگرام:**
+در مرورگر یا ترمینال، این URL را باز کنید (توکن ربات را جایگزین کنید):
+```
+https://api.telegram.org/botYOUR_BOT_TOKEN/setWebhook?url=https://devbot.your-subdomain.workers.dev
+```
+مثال واقعی:
+```
+https://api.telegram.org/bot123456789:ABCdefGHIjklMNOpqrsTUVwxyz/setWebhook?url=https://devbot.yourname.workers.dev
+```
+**۳. بررسی وضعیت وب‌هوک:**
+```
+https://api.telegram.org/botYOUR_BOT_TOKEN/getWebhookInfo
+```
+**۴. حذف وب‌هوک (در صورت نیاز):**
+```
+https://api.telegram.org/botYOUR_BOT_TOKEN/deleteWebhook
+```
+> 💡 **نکته:** وب‌هوک ضروری نیست برای ارسال پست‌ها (Cron Job خودکار کار می‌کند)، اما برای دستورات ادمین (`/usage`, `/force`, `/status` و...) لازم است.
 ### ✅ تمام!
 
 ربات شما اکنون فعال است و هر ۳ دقیقه اخبار جدید را بررسی و ارسال می‌کند! 🎉
